@@ -6,7 +6,9 @@ export function parseFirebaseTime(date) {
     const resDate = new Date(milliseconds);
     const hours = resDate.getHours();
     const minutes = resDate.getMinutes();
-    const timeString = `${hours}:${minutes}`;
+    const timeString = `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}`;
 
     return timeString;
   } catch {
