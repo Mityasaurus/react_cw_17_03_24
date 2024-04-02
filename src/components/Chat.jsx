@@ -41,7 +41,7 @@ export default function Chat() {
         container
         justifyContent={"center"}
         alignContent={"flex-start"}
-        style={{ height: window.innerHeight - 50, marginTop: "10px" }}
+        style={{ height: window.innerHeight - 75, marginTop: "10px" }}
       >
         <Message messages={messages} />
         <Grid

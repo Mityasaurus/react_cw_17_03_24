@@ -43,6 +43,7 @@ export default function Message({ messages }) {
         backgroundColor: "#fafafa",
         overflowY: "auto",
         borderRadius: 10,
+        padding: "0 10px",
       }}
     >
       {/* {Відображаємо повідомлення, груповані за датою} */}
