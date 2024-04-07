@@ -1,13 +1,18 @@
 import { Box, Button, Container, Grid } from "@mui/material";
 import React from "react";
 import { useApp } from "../utils/context";
+import { addUserDB } from "../utils/saveUserData";
 
 export default function Login() {
-  const { firebase, auth } = useApp();
+  const { firebase, auth, users } = useApp();
+
   const login = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     const { user } = await auth.signInWithPopup(provider);
     console.log(user);
+    if (users.find(({ uid }) => user.uid === uid) === undefined) {
+      addUserDB(user);
+    }
   };
 
   return (

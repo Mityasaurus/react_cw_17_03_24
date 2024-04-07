@@ -3,6 +3,7 @@ import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqSkTUDQWjjYfXYWSvhBnkLqKxgRneV4k",
@@ -31,8 +32,11 @@ export const useApp = () => {
 };
 
 export const AppProvider = ({ children }) => {
+  const [users] = useCollectionData(
+    firestore.collection("users").orderBy("uid")
+  );
   return (
-    <AppContext.Provider value={{ firebase, auth, firestore }}>
+    <AppContext.Provider value={{ firebase, auth, firestore, users }}>
       {children}
     </AppContext.Provider>
   );
