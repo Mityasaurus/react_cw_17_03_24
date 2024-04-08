@@ -3,15 +3,15 @@ import { Container, Grid, Avatar } from "@mui/material";
 
 export default function Friends({ users }) {
   return (
-    <Container>
-      <Grid container width={"20vw"}>
+    <Container maxWidth="xs">
+      <Grid container paddingRight={"25%"} justifyContent={"center"}>
+        <h3 style={{ margin: "10px 0 5px 0" }}>Chat friends</h3>
         {users.map(({ name, photoUrl }) => (
           <Grid
             container
+            justifyContent={"flex-start"}
             alignItems={"center"}
             gap={"10px"}
-            border={"1px solid black"}
-            borderRadius={"10px"}
             padding={"10px"}
           >
             <Avatar src={photoUrl} />

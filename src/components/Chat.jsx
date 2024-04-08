@@ -42,14 +42,15 @@ export default function Chat() {
   };
 
   return (
-    <Container>
-      <Grid container flexWrap={"nowrap"} width={"80vw"}>
+    <Container maxWidth="llg">
+      <Grid container flexWrap={"nowrap"} justifyContent={"center"}>
         <Friends users={users} />
         <Grid
           container
           justifyContent={"center"}
-          alignContent={"flex-start"}
+          alignContent={"center"}
           style={{ height: window.innerHeight - 75, marginTop: "10px" }}
+          margin={"0 -7%"}
         >
           <Message messages={messages} />
           <Grid
@@ -78,6 +79,7 @@ export default function Chat() {
             </Button>
           </Grid>
         </Grid>
+        <Container maxWidth="xs"></Container>
       </Grid>
     </Container>
   );
