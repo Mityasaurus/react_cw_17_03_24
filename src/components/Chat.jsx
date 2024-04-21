@@ -9,12 +9,11 @@ import Friends from "./Friends";
 
 export default function Chat() {
   const [value, setValue] = useState("");
-  const { auth, firebase, firestore, users } = useApp();
+  const { auth, firebase, firestore, users, userId } = useApp();
   const [user] = useAuthState(auth);
   console.log(user);
 
   //хук отримання повідомлень
-
   const [messages, loading] = useCollectionData(
     firestore.collection("messages").orderBy("createdAt")
   );
@@ -26,7 +25,9 @@ export default function Chat() {
   //Відправка повідомлень
   const sendMessage = async () => {
     const message = {
-      uid: user.uid,
+      current_uid: user.uid,
+      current_email: user.email,
+      sender_uid: userId,
       displayName: user.displayName,
       photoUrl: user.photoURL,
       text: value,

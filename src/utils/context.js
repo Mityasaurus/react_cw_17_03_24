@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -32,11 +32,17 @@ export const useApp = () => {
 };
 
 export const AppProvider = ({ children }) => {
+  const [userId, setUserId] = useState("");
   const [users] = useCollectionData(
     firestore.collection("users").orderBy("uid")
   );
+  const handleSelectUser = (selectedUserId) => {
+    setUserId(selectedUserId);
+  };
   return (
-    <AppContext.Provider value={{ firebase, auth, firestore, users }}>
+    <AppContext.Provider
+      value={{ firebase, auth, firestore, users, handleSelectUser, userId }}
+    >
       {children}
     </AppContext.Provider>
   );

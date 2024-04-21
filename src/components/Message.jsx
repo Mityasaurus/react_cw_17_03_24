@@ -7,8 +7,22 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Message({ messages }) {
   // console.log(messages);
-  const { auth } = useApp();
+  const { auth, userId } = useApp();
   const [user] = useAuthState(auth);
+
+  const messagesArray = messages.filter((m) => {
+    if (
+      m &&
+      m.hasOwnProperty("current_uid") &&
+      m.hasOwnProperty("sender_uid")
+    ) {
+      return (
+        (m.current_uid === user.uid && m.sender_uid === userId) ||
+        (m.current_uid === userId && m.sender_uid === user.uid)
+      );
+    }
+    return false;
+  });
 
   const messagesEndRef = useRef(null);
   useEffect(() => {
@@ -19,7 +33,7 @@ export default function Message({ messages }) {
   // grouped by date
   const groupMessageByDate = (messages) => {
     const groupedMessages = {};
-    messages.forEach(({ createdAt, ...rest }) => {
+    messagesArray.forEach(({ createdAt, ...rest }) => {
       if (createdAt && createdAt.seconds) {
         const date = new Date(createdAt.seconds * 1000).toLocaleDateString(
           "uk-UA"

@@ -10,5 +10,5 @@ const otherUser = {
 };
 
 export function styleMessageByUser(messages, user) {
-  return messages.uid === user.uid ? loginUser : otherUser;
+  return messages.current_uid === user.uid ? loginUser : otherUser;
 }
